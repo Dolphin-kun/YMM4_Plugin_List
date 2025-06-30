@@ -1,0 +1,45 @@
+name: Sync to Private Repo
+
+on:
+  push:
+    paths:
+      - 'plugin/**'
+
+jobs:
+  sync-plugin:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout public repo
+        uses: actions/checkout@v3
+
+      - name: Clone private repo
+        env:
+          GIT_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Clone private repo with auth
+          git clone https://x-access-token:${GIT_TOKEN}@github.com/YOUR_NAME/YOUR_PRIVATE_REPO.git private-repo
+          cd private-repo
+
+          # Create a new branch
+          BRANCH_NAME=update-plugin-$(date +%s)
+          git checkout -b $BRANCH_NAME
+
+          # Replace plugin folder
+          rm -rf plugin
+          cp -r ../plugin ./plugin
+
+          git add plugin
+          git commit -m "Update plugin list from public repo"
+          git push origin $BRANCH_NAME
+
+          # Install GitHub CLI to create a PR
+          sudo apt install gh -y
+          gh auth login --with-token <<< "${GIT_TOKEN}"
+          gh pr create --title "Update plugin list" \
+                       --body "Automated update from public plugin repo" \
+                       --base main \
+                       --head $BRANCH_NAME
