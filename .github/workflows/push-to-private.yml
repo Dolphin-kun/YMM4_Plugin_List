@@ -1,4 +1,4 @@
-name: Sync to Private Repo
+name: Sync plugin to private repo
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - 'plugin/**'
 
 jobs:
-  sync-plugin:
+  sync:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,26 +20,28 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Clone private repo with auth
-          git clone https://x-access-token:${GIT_TOKEN}@github.com/YOUR_NAME/YOUR_PRIVATE_REPO.git private-repo
+          # Clone private repo
+          git clone https://x-access-token:${GIT_TOKEN}@github.com/Dolphin-kun/YMME_YMM4-info.git private-repo
           cd private-repo
 
-          # Create a new branch
-          BRANCH_NAME=update-plugin-$(date +%s)
+          # 新しいブランチを作成
+          BRANCH_NAME=sync-plugin-$(date +%s)
           git checkout -b $BRANCH_NAME
 
-          # Replace plugin folder
-          rm -rf plugin
-          cp -r ../plugin ./plugin
+          # plugin ディレクトリを src/plugins に上書きコピー
+          rm -rf src/plugins
+          mkdir -p src/plugins
+          cp -r ../plugin/* src/plugins/
 
-          git add plugin
-          git commit -m "Update plugin list from public repo"
+          git add src/plugins
+          git commit -m "Update plugins from public repo"
           git push origin $BRANCH_NAME
 
-          # Install GitHub CLI to create a PR
-          sudo apt install gh -y
+          # GitHub CLI を使ってPRを作成
+          sudo apt install -y gh
           gh auth login --with-token <<< "${GIT_TOKEN}"
-          gh pr create --title "Update plugin list" \
-                       --body "Automated update from public plugin repo" \
-                       --base main \
-                       --head $BRANCH_NAME
+          gh pr create \
+            --title "Update plugins from public repo" \
+            --body "Automated sync from https://github.com/YOUR_NAME/YMM4_Plugin_List" \
+            --base main \
+            --head $BRANCH_NAME
