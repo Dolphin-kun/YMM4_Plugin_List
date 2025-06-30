@@ -13,7 +13,7 @@ jobs:
       - name: Checkout public repo
         uses: actions/checkout@v3
 
-      - name: Clone private repo
+      - name: Clone private repo and sync plugins
         env:
           GIT_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
         run: |
@@ -24,11 +24,15 @@ jobs:
           git clone https://x-access-token:${GIT_TOKEN}@github.com/Dolphin-kun/YMME_YMM4-info.git private-repo
           cd private-repo
 
+          # publicリポジトリの最新コミット情報を取得（../がpublic repoのルート）
+          COMMIT_AUTHOR=$(git --git-dir=../.git log -1 --pretty=format:'%an')
+          COMMIT_HASH=$(git --git-dir=../.git rev-parse --short HEAD)
+
           # 新しいブランチを作成
           BRANCH_NAME=sync-plugin-$(date +%s)
           git checkout -b $BRANCH_NAME
 
-          # plugin ディレクトリを src/plugins に上書きコピー
+          # plugins ディレクトリを src/plugins に上書きコピー
           rm -rf src/plugins
           mkdir -p src/plugins
           cp -r ../plugins/* src/plugins/
@@ -37,9 +41,12 @@ jobs:
           git commit -m "Update plugins from public repo"
           git push origin $BRANCH_NAME
 
-          # GitHub CLI を使ってPRを作成
+          # GitHub CLIをインストールして認証
+          sudo apt update
           sudo apt install -y gh
-          gh auth login --with-token <<< "${GIT_TOKEN}"
+          echo "${GIT_TOKEN}" | gh auth login --with-token
+
+          # プルリクエスト作成
           gh pr create \
             --title "🔄 公開リポジトリから plugins を同期" \
             --body "自動同期された plugins の更新です。\n\n元の変更者: **${COMMIT_AUTHOR}**\nコミット: https://github.com/Dolphin-kun/YMM4_Plugin_List/commit/${COMMIT_HASH}" \
