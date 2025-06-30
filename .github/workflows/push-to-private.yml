@@ -41,7 +41,7 @@ jobs:
           sudo apt install -y gh
           gh auth login --with-token <<< "${GIT_TOKEN}"
           gh pr create \
-            --title "Update plugins from public repo" \
-            --body "Automated sync from https://github.com/YOUR_NAME/YMM4_Plugin_List" \
+            --title "🔄 公開リポジトリから plugins を同期" \
+            --body "自動同期された plugins の更新です。\n\n元の変更者: **${COMMIT_AUTHOR}**\nコミット: https://github.com/Dolphin-kun/YMM4_Plugin_List/commit/${COMMIT_HASH}" \
             --base main \
             --head $BRANCH_NAME
