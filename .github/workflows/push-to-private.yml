@@ -3,7 +3,7 @@ name: Sync plugin to private repo
 on:
   push:
     paths:
-      - 'plugin/**'
+      - 'plugins/**'
 
 jobs:
   sync:
@@ -31,7 +31,7 @@ jobs:
           # plugin ディレクトリを src/plugins に上書きコピー
           rm -rf src/plugins
           mkdir -p src/plugins
-          cp -r ../plugin/* src/plugins/
+          cp -r ../plugins/* src/plugins/
 
           git add src/plugins
           git commit -m "Update plugins from public repo"
