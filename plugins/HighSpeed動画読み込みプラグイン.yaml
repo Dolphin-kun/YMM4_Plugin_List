@@ -1,0 +1,8 @@
+title: HighSpeed動画読み込みプラグイン
+description: YMM4標準のものに比べ、高速に動画を読み込める動画読み込みプラグインです
+author: 翼
+createdAt: 2024-09-14
+version: "1.0.4"
+topics: ymm4-video-source
+keywords: [""]
+category: ["動画読み込み"]

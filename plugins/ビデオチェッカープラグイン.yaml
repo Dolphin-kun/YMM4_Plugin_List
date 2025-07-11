@@ -1,0 +1,8 @@
+title: ビデオチェッカープラグイン
+description: 映像アイテム(図形アイテムや動画アイテム等)の内部数値を調べることができる映像エフェクトです
+author: べにかずら
+createdAt: 2024-03-13
+version: "1.3.0"
+topics: ymm4-video-effect
+keywords: [""]
+category: ["映像エフェクト"]

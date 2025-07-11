@@ -1,0 +1,8 @@
+title: Volumetric FractalNoise
+description: 3Dのフラクタルノイズを生成する映像エフェクトです
+author: 肉(mes)
+createdAt: 2024-01-09
+version: "1.0.0"
+topics: ymm4-video-effect
+keywords: [""]
+category: ["映像エフェクト"]

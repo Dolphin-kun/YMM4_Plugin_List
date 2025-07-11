@@ -1,0 +1,8 @@
+title: 音声遅延エフェクト
+description: 左右チャンネル別々に音声を遅れて再生させられる音声エフェクトです
+author: kotolin
+createdAt: 2024-10-03
+version: "1.0"
+topics: ymm4-audio-effect
+keywords: [""]
+category: ["音声エフェクト"]

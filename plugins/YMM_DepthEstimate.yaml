@@ -1,0 +1,8 @@
+title: YMM_DepthEstimate
+description: 映像から深度マップ画像を生成する映像エフェクトです
+author: 肉(mes)
+createdAt: 2025-07-9
+version: 1.0.0
+topics: ymm4-video-effect
+keywords: [""]
+category: ["映像エフェクト"]

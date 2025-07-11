@@ -1,0 +1,8 @@
+title: AudioLink
+description: 音声が特定の条件を満たしている場合にのみエフェクトを適用する音声エフェクトです
+author: メタロロ
+createdAt: 2025-06-15
+version: "0.1"
+topics: ymm4-audio-effect
+keywords: [""]
+category: ["音声エフェクト"]

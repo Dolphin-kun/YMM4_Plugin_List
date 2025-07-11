@@ -1,0 +1,8 @@
+title: YMM4-MoreBOUYOMIPlugin
+description: YMM4から棒読みちゃんの音声を利用できるようにする音声合成プラグインです
+author: taisan
+createdAt: 2025-01-04
+version: "1.0.1"
+topics: ymm4-voice
+keywords: [""]
+category: ["音声合成"]

@@ -1,0 +1,8 @@
+title: 数値テキストプラグイン
+description: カンマ区切りや小数点の任意の桁数表示に対応した数値表示プラグインです
+author: Prer
+createdAt: 2024-02-20
+version: "1.0.1"
+topics: ymm4-shape
+keywords: [""]
+category: ["図形"]

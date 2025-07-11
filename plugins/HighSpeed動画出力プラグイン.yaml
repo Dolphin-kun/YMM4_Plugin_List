@@ -1,0 +1,8 @@
+title: HighSpeed動画出力プラグイン
+description: YMM4標準のものに比べ、高速に動画を出力できる動画出力プラグインです
+author: 翼
+createdAt: 2024-10-08
+version: "1.0.1"
+topics: ymm4-video-writer
+keywords: [""]
+category: ["動画出力"]

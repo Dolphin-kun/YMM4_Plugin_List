@@ -1,0 +1,8 @@
+title: HzWave
+description: 周波数から波形を生成する音声エフェクトです
+author: kotolin
+createdAt: 2025-02-17
+version: "1.0.0"
+topics: ymm4-audio-effect
+keywords: [""]
+category: ["音声エフェクト"]

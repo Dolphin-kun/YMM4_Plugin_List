@@ -1,0 +1,8 @@
+title: YMM_BrokenJpeg
+description: Jpeg圧縮処理を用いて画像を乱す映像エフェクトです
+author: 肉(mes)
+createdAt: 2024-08-12
+version: "1.0.0"
+topics: ymm4-video-effect
+keywords: [""]
+category: ["映像エフェクト"]

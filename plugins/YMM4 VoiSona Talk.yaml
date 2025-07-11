@@ -1,0 +1,8 @@
+title: YMM4 VoiSona Talk
+description: YMM4からVoiSonaTalkの音声を利用できるようにする音声合成プラグインです
+author: いぬいぬ
+createdAt: 2024-10-12
+version: "1.2.1"
+topics: ymm4-voice
+keywords: [""]
+category: ["音声合成"]
