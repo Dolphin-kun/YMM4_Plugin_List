@@ -2,7 +2,7 @@ title: 残像
 description: アイテムに残像を発生させる映像エフェクトです
 author: いるかぁぁ
 createdAt: 2025-07-23
-version: "0.0.1"
+version: "0.0.1.0"
 topics: ymm4-video-effect
 keywords: [""]
 category: ["映像エフェクト"]
