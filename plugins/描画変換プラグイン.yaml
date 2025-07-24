@@ -1,4 +1,5 @@
-title: 描画変換プラグイン
+id: DrawConversionEffect
+title: YMM4非遅延描画プラグイン（旧 描画変換プラグイン）
 description: 拡大率、回転角、不透明度、左右反転をエフェクトを適用したタイミングで処理する映像エフェクトです
 author: べにかずら
 createdAt: 2023-10-24
