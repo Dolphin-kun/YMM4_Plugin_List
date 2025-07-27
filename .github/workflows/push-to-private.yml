@@ -1,19 +1,4 @@
-name: Sync plugin to private repo
-
-on:
-  push:
-    paths:
-      - 'plugins/**'
-
-jobs:
-  sync:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout public repo
-        uses: actions/checkout@v3
-
-      - name: Clone private repo and sync plugins
+- name: Clone private repo and sync plugins
         env:
           GIT_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
         run: |
@@ -21,34 +6,24 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Clone private repo
-          git clone https://x-access-token:${GIT_TOKEN}@github.com/Dolphin-kun/YMME_YMM4-info.git private-repo
+          # --branch main を指定して、mainブランチを直接チェックアウトします
+          git clone --branch main https://x-access-token:${GIT_TOKEN}@github.com/Dolphin-kun/YMME_YMM4-info.git private-repo
           cd private-repo
 
-          # publicリポジトリの最新コミット情報を取得（../がpublic repoのルート）
+          # publicリポジトリの最新コミット情報を取得
           COMMIT_AUTHOR=$(git --git-dir=../.git log -1 --pretty=format:'%an')
           COMMIT_HASH=$(git --git-dir=../.git rev-parse --short HEAD)
-
-          # 新しいブランチを作成
-          BRANCH_NAME=sync-plugin-$(date +%s)
-          git checkout -b $BRANCH_NAME
+          PUBLIC_REPO_URL="https://github.com/Dolphin-kun/YMM4_Plugin_List" # publicリポジトリのURL
 
           # plugins ディレクトリを src/plugins に上書きコピー
           rm -rf src/plugins
           mkdir -p src/plugins
           cp -r ../plugins/* src/plugins/
 
+          # 変更をステージングしてコミット
+          # コミットメッセージに元の変更情報を記載
           git add src/plugins
-          git commit -m "Update plugins from public repo"
-          git push origin $BRANCH_NAME
+          git commit -m "🔄 pluginsを自動同期" -m "元の変更者: ${COMMIT_AUTHOR}" -m "コミット: ${PUBLIC_REPO_URL}/commit/$(git --git-dir=../.git rev-parse HEAD)"
 
-          # GitHub CLIをインストールして認証
-          sudo apt update
-          sudo apt install -y gh
-          echo "${GIT_TOKEN}" | gh auth login --with-token
-
-          # プルリクエスト作成
-          gh pr create \
-            --title "🔄 公開リポジトリから plugins を同期" \
-            --body "自動同期された plugins の更新です。\n\n元の変更者: **${COMMIT_AUTHOR}**\nコミット: https://github.com/Dolphin-kun/YMM4_Plugin_List/commit/${COMMIT_HASH}" \
-            --base main \
-            --head $BRANCH_NAME
+          # mainブランチに直接プッシュ
+          git push origin main
