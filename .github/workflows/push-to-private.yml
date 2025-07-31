@@ -1,29 +1,50 @@
-- name: Clone private repo and sync plugins
+# ワークフローの名前
+name: Sync Plugins to Private Repo
+
+# ワークフローが実行されるトリガー
+on:
+  push:
+    paths:
+      - 'plugins/**'
+
+# 実行される一連のジョブを定義
+jobs:
+  sync: # ジョブのID（任意の名前に変更可能）
+    runs-on: ubuntu-latest
+    steps:
+      # 1. このリポジトリのコードをチェックアウトする
+      - name: Checkout public repo
+        uses: actions/checkout@v4
+
+      # 2. あなたが作成したスクリプトを実行する
+      - name: Clone private repo and sync plugins
         env:
           GIT_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # Clone private repo
-          # --branch main を指定して、mainブランチを直接チェックアウトします
+          
+          # プライベートリポジトリのmainブランチをクローン
           git clone --branch main https://x-access-token:${GIT_TOKEN}@github.com/Dolphin-kun/YMME_YMM4-info.git private-repo
           cd private-repo
-
-          # publicリポジトリの最新コミット情報を取得
+          
+          # publicリポジトリのコミット情報を取得
           COMMIT_AUTHOR=$(git --git-dir=../.git log -1 --pretty=format:'%an')
-          COMMIT_HASH=$(git --git-dir=../.git rev-parse --short HEAD)
-          PUBLIC_REPO_URL="https://github.com/Dolphin-kun/YMM4_Plugin_List" # publicリポジトリのURL
-
-          # plugins ディレクトリを src/plugins に上書きコピー
+          PUBLIC_REPO_URL="https://github.com/Dolphin-kun/YMM4_Plugin_List"
+          PUBLIC_REPO_COMMIT=$(git --git-dir=../.git rev-parse HEAD)
+          
+          # ファイルをコピー
           rm -rf src/plugins
           mkdir -p src/plugins
           cp -r ../plugins/* src/plugins/
-
-          # 変更をステージングしてコミット
-          # コミットメッセージに元の変更情報を記載
+          
+          # 差分がない場合はここで処理を終了
+          if git diff --quiet --exit-code; then
+            echo "✅ No changes detected. Skipping commit."
+            exit 0
+          fi
+          
+          # 変更をコミットしてプッシュ
           git add src/plugins
-          git commit -m "🔄 pluginsを自動同期" -m "元の変更者: ${COMMIT_AUTHOR}" -m "コミット: ${PUBLIC_REPO_URL}/commit/$(git --git-dir=../.git rev-parse HEAD)"
-
-          # mainブランチに直接プッシュ
+          git commit -m "🔄 pluginsを自動同期" -m "元の変更者: ${COMMIT_AUTHOR}" -m "コミット: ${PUBLIC_REPO_URL}/commit/${PUBLIC_REPO_COMMIT}"
           git push origin main
