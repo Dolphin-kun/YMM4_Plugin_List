@@ -1,6 +1,6 @@
 id: Afterimage
 title: 残像
-description: アイテムに残像を発生させる映像エフェクトです
+description: 動きのある映像に残像を発生させる映像エフェクトです
 author: いるかぁぁ
 createdAt: 2025-07-23
 version: "1.0.1"
