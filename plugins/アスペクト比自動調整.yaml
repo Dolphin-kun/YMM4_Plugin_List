@@ -1,0 +1,9 @@
+id: AutomaticAspectRatio
+title: アスペクト比自動調整
+description: 画面内に収まるようにアスペクト比を調整する映像エフェクトです
+author: べにかずら
+createdAt: 2025-07-27
+version: "1.0.1"
+topics: ymm4-video-effect
+keywords: [""]
+category: ["映像エフェクト"]
