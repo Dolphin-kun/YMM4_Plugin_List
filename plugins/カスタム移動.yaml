@@ -1,0 +1,9 @@
+id: CustomEasing
+title: カスタム移動
+description: アイテムの移動に自由な緩急（イージング）を設定できる映像エフェクトです
+author: routersys
+createdAt: 2025-08-01
+version: "0.1.3"
+topics: ymm4-video-effect
+keywords: [""]
+category: ["映像エフェクト"]
