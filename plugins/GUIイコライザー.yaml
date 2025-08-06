@@ -1,0 +1,9 @@
+id: GUI-Equalizer
+title: GUIイコライザー
+description: 直感的なUIでイコライザをかけることができる音声エフェクトです
+author: routersys
+createdAt: 2025-08-04
+version: "0.0.3"
+topics: ymm4-audio-effect
+keywords: [""]
+category: ["音声エフェクト"]
