@@ -1,0 +1,9 @@
+id: Ymm4ObjectListPlugin
+title: YMM4オブジェクトリスト
+description: タイムライン上のアイテムを一覧表示するツールを追加するツールプラグインです
+author: いぬいぬ
+createdAt: 2025-08-03
+version: "1.1.2"
+topics: ymm4-plugin
+keywords: [""]
+category: ["その他"]
