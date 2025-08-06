@@ -1,0 +1,9 @@
+id: PDFViewer
+title: PDF図形
+description: PDFファイルを図形として読み込めるようにする図形プラグインです
+author: routersys
+createdAt: 2025-08-03
+version: "0.0.1"
+topics: ymm4-shape
+keywords: [""]
+category: ["図形"]
