@@ -38,12 +38,6 @@ jobs:
           mkdir -p src/plugins
           cp -r ../plugins/* src/plugins/
           
-          # 差分がない場合はここで処理を終了
-          if git diff --quiet --exit-code; then
-            echo "✅ No changes detected. Skipping commit."
-            exit 0
-          fi
-          
           # 変更をコミットしてプッシュ
           git add src/plugins
           git commit -m "🔄 pluginsを自動同期" -m "元の変更者: ${COMMIT_AUTHOR}" -m "コミット: ${PUBLIC_REPO_URL}/commit/${PUBLIC_REPO_COMMIT}"
