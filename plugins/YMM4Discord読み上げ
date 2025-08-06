@@ -1,9 +1,0 @@
-id: YMM4DiscordTTS
-title: YMM4Discord読み上げ
-description: YMM4内でDiscordの読み上げBotをホストするプラグインです。
-author: いるかぁぁ
-createdAt: 2025-08-06
-version: "1.0.2"
-topics: ymm4-plugin
-keywords: [""]
-category: ["その他"]
